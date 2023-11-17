@@ -41,9 +41,9 @@ class Token
         {
             this->type = type;
             this->string = string;
-            this->priority = -1;
-            this->rightAssociative = false;
-            this->unary = false;
+            this->priority = priority;
+            this->rightAssociative = rightAssociative;
+            this->unary = unary;
         }
 
         Token(Type type, const std::string& string)

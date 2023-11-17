@@ -32,7 +32,7 @@ std::deque<Token> tokenize(const std::string& expression)
         else 
         {
             Token::Type type = Token::Type::UNKNOWN;
-            int precedence = -1;
+            int priority = -1;
             bool rightAssociative = false;
             bool unary = false;
             char c = *i;
@@ -47,20 +47,20 @@ std::deque<Token> tokenize(const std::string& expression)
                         break;
                 case '^':
                         type = Token::Type::OPERATOR;
-                        precedence = 4; 
+                        priority = 4; 
                         rightAssociative = true; 
                         break;
                 case '*':  
                         type = Token::Type::OPERATOR;
-                        precedence = 3;
+                        priority = 3;
                         break;
                 case '/':
                         type = Token::Type::OPERATOR;
-                        precedence = 3; 
+                        priority = 3; 
                         break;
                 case '+':
                         type = Token::Type::OPERATOR;
-                        precedence = 2; 
+                        priority = 2; 
                         break;
                 case '-':
                         // If the current token is '-' and if it is the first token, or preceded by another operator, or by left bracket (&)
@@ -72,13 +72,13 @@ std::deque<Token> tokenize(const std::string& expression)
                             unary = true;
                             c = '#';
                             type = Token::Type::OPERATOR;
-                            precedence = 5;
+                            priority = 5;
                         } 
                         else 
                         {
                             // Otherwise, it's binary '-';
                             type = Token::Type::OPERATOR;
-                            precedence = 2;
+                            priority = 2;
                         }
                         break;
                 default:
@@ -87,7 +87,7 @@ std::deque<Token> tokenize(const std::string& expression)
             std::string string(1, c);
 
             Token temporary;
-            temporary.setPriority(precedence);
+            temporary.setPriority(priority);
             temporary.setRightAssociativity(rightAssociative);
             temporary.setString(string);
             temporary.setType(type);
@@ -102,8 +102,8 @@ std::deque<Token> tokenize(const std::string& expression)
 
 std::deque<Token> shuntingYard(std::deque<Token>& tokens) 
 {
-    std::deque<Token> deque;
-    std::vector<Token> vector;
+    std::deque<Token> deque;   // queue;
+    std::vector<Token> vector; // stack;
 
     for (std::size_t i = 0; i < tokens.size(); ++i)
     {
@@ -150,20 +150,20 @@ std::deque<Token> shuntingYard(std::deque<Token>& tokens)
 
             case Token::Type::RIGHT_BRACKET:
                 {
-                    bool match = false;
+                    bool flag = false;
                     // Until the token at the top of the "stack" is a left parenthesis, (&&&)
-                    while(! vector.empty() && vector.back().getType() != Token::Type::LEFT_BRACKET) 
+                    while(!vector.empty() && vector.back().getType() != Token::Type::LEFT_BRACKET) 
                     {
                         // (&&&) pop operators off the stack and onto the output deque;
                         deque.push_back(vector.back());
                         vector.pop_back();
-                        match = true;
+                        flag = true;
                     }
 
-                    if(!match && vector.empty()) 
+                    if(!flag && vector.empty()) 
                     {
                         // If the "stack" runs out without finding a left bracket, then there are mismatched parentheses;
-                        throw "No right bracket found! //shuntingYard(), case::RIGHT_BRACKET\n";
+                        throw "No left bracket found! //shuntingYard(), case::RIGHT_BRACKET\n";
                     }
 
                     // Pop the left bracket from the "stack", but do not place it onto the output deque.
@@ -186,7 +186,7 @@ std::deque<Token> shuntingYard(std::deque<Token>& tokens)
             }
 
             // Pop the operator onto the output deque;
-            deque.push_back(std::move(vector.back()));
+            deque.push_back(vector.back());
             vector.pop_back();
     }
     return deque;
@@ -264,6 +264,7 @@ int evaluate(const std::string& expression)
                 break;
             default:
                 throw "Error! // compute(), switch::default\n";
+                break;
         }
     }
     return vector.back();
