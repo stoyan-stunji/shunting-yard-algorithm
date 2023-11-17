@@ -11,27 +11,26 @@ How It Works:
 [![Capture.png](https://i.postimg.cc/g0MsCMnj/Capture.png)](https://postimg.cc/wtmDJQ5Y)
 
 Example:
-+ 1. Input: "3 + 4";
-+ 2. Push "3" to the output queue (whenever a number is read it is pushed to the output);
-+ 3. Push "+"  onto the operator stack;
-+ 4. Push "4" to the output queue;
-+ 5. After reading the expression, pop the operators off the stack and add them to the output;
-     In this case there is only one, "+";
-+ 6. Output: "3 4 +";
-
-+ All numbers are pushed to the output when they are read.
-+ At the end of reading the expression, pop all operators off the stack and onto the output.
+> 1. Input: "3 + 4";
+> 2. Push "3" to the output queue (whenever a number is read it is pushed to the output);
+> 3. Push "+"  onto the operator stack;
+> 4. Push "4" to the output queue;
+> 5. After reading the expression, pop the operators off the stack and add them to the output;
+>    In this case there is only one, "+";
+> 6. Output: "3 4 +";
+>
+> All numbers are pushed to the output when they are read.
+> At the end of reading the expression, pop all operators off the stack and onto the output.
 
 Inspiration:
-> https://gist.github.com/t-mat/b9f681b7591cdae712f6
-> 
-> https://en.wikipedia.org/wiki/Shunting_yard_algorithm
++ https://gist.github.com/t-mat/b9f681b7591cdae712f6 
++ https://en.wikipedia.org/wiki/Shunting_yard_algorithm
 
 How To Run:
 > ...
 
 Future Additions and Bug Fixes:
-> Add CMakeTests.txt;
++ Add CMakeTests.txt;
 
 Picture:
-> [![Capture1.png](https://i.postimg.cc/kGPbz8FD/Capture1.png)](https://postimg.cc/dkn3ThfK)
+[![Capture1.png](https://i.postimg.cc/kGPbz8FD/Capture1.png)](https://postimg.cc/dkn3ThfK)
