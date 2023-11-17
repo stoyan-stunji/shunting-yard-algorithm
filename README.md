@@ -23,7 +23,14 @@ Example:
 
 Inspiration:
 > https://gist.github.com/t-mat/b9f681b7591cdae712f6
+> 
 > https://en.wikipedia.org/wiki/Shunting_yard_algorithm
+
+How To Run:
+> ...
 
 Future Additions and Bug Fixes:
 > Add CMakeTests.txt;
+
+Picture:
+> 
