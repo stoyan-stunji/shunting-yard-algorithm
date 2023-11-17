@@ -8,13 +8,19 @@ How It Works:
 > The shunting yard algorithm will correctly parse all valid infix expressions, but does not reject all invalid expressions. For example, "1 2 +" is not a valid infix expression, but would be parsed as "1 + 2". The algorithm can however reject expressions with mismatched parentheses.
 
 Example:
-> 1. Input: 3 + 4
-> 2. Push 3 to the output queue (whenever a number is read it is pushed to the output)
-> 3. Push +  onto the operator stack
-> 4. Push 4 to the output queue
-> 5. After reading the expression, pop the operators off the stack and add them to the output.
->    In this case there is only one, "+".
-> 6. Output: 3 4 +
+> 1. Input: "3 + 4";
+> 2. Push "3" to the output queue (whenever a number is read it is pushed to the output);
+> 3. Push "+"  onto the operator stack;
+> 4. Push "4" to the output queue;
+> 5. After reading the expression, pop the operators off the stack and add them to the output;
+>    In this case there is only one, "+";
+> 6. Output: "3 4 +";
 >
 > All numbers are pushed to the output when they are read.
 > At the end of reading the expression, pop all operators off the stack and onto the output.
+
+Inspiration:
+> https://gist.github.com/t-mat/b9f681b7591cdae712f6
+
+General Information From:
+> https://en.wikipedia.org/wiki/Shunting_yard_algorithm
